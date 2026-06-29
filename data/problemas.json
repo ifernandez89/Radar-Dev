@@ -15,10 +15,10 @@
   },
   {
     "id": "documentacion-dispersa",
-    "nombre": "Documentación física y archivos PDF sin indexar",
-    "impacto": "Muy Alto",
-    "descripcion": "Horas perdidas buscando contratos, facturas, legajos o historias clínicas.",
-    "sectores": ["gestion-documental-ia", "educacion", "clinicas", "empresas-industriales"]
+    "nombre": "Documentación física y archivos desorganizados",
+    "impacto": "Alto",
+    "descripcion": "Horas perdidas buscando facturas, contratos, legajos o historias clínicas en papel o carpetas sin orden.",
+    "sectores": ["educacion", "clinicas", "empresas-industriales"]
   },
   {
     "id": "stock-manual",
@@ -38,7 +38,7 @@
     "id": "sistemas-legacy",
     "nombre": "Sistemas administrativos obsoletos (AS400, FoxPro, etc.)",
     "impacto": "Muy Alto",
-    "descripcion": "Imposibilidad de integrar nuevas herramientas o consultar datos móviles.",
+    "descripcion": "Imposibilidad de integrar nuevas herramientas o consultar datos en dispositivos móviles.",
     "sectores": ["empresas-industriales", "cooperativas", "estudios-contables"]
   }
 ]

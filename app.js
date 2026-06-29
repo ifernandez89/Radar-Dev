@@ -1,88 +1,94 @@
 /* ==========================================================================
-   ATLAS DE MODERNIZACIÓN DIGITAL — LÓGICA DE APLICACIÓN JS
+   ATLAS DE MODERNIZACIÓN DIGITAL — LÓGICA DE APLICACIÓN JS (PÁGINA ÚNICA)
    ========================================================================== */
 
-// 1. Estado Global de Datos
+// 1. Estado de Datos
 let sectoresData = [];
 let problemasData = [];
 let solucionesData = [];
 let organizacionesData = [];
-let ideasData = [];
 
 let activeSectorFilter = 'todos';
 let activeProvinciaFilter = 'todas';
 let currentSearchQuery = '';
+let activeProblemsSolutionsTab = 'problems'; // 'problems' | 'solutions'
 
-// 2. Inicialización de la Aplicación
+// 2. Inicialización
 document.addEventListener('DOMContentLoaded', () => {
-    // Configurar Fecha Actual
-    const dateEl = document.getElementById('currentDate');
-    if (dateEl) {
-        dateEl.textContent = new Date().toISOString().split('T')[0];
+    // Configurar año en footer
+    const yearEl = document.getElementById('footer-year');
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
     }
     
-    // Carga de Datos JSON
+    // Cargar datos estáticos
     loadData();
     
-    // Configurar Navegación y Listeners de UI
+    // Configurar listeners globales de la interfaz
     setupEventListeners();
 });
 
-// Carga de Datos desde JSONs
+// Carga de datos de los JSON
 async function loadData() {
     try {
-        const [sectoresRes, problemasRes, solucionesRes, organizacionesRes, ideasRes] = await Promise.all([
+        const [sectoresRes, problemasRes, solucionesRes, organizacionesRes] = await Promise.all([
             fetch('data/sectores.json'),
             fetch('data/problemas.json'),
             fetch('data/soluciones.json'),
-            fetch('data/organizaciones.json'),
-            fetch('data/ideas.json')
+            fetch('data/organizaciones.json')
         ]);
         
         sectoresData = await sectoresRes.json();
         problemasData = await problemasRes.json();
         solucionesData = await solucionesRes.json();
         organizacionesData = await organizacionesRes.json();
-        ideasData = await ideasRes.json();
         
-        // Inicializar Dashboard e Interfaz
-        buildDashboardKPIs();
-        buildProspectosPrioritarios();
-        
-        // Manejar Ruta por Defecto o URL Hash actual
-        handleRouting();
+        // Renderizar todos los bloques de la página
+        renderHeroKPIs();
+        renderSectores();
+        renderProblemasSoluciones();
+        buildSectorFilterPills();
+        renderOrganizaciones();
         
     } catch (error) {
         console.error('Error al cargar datos del Atlas Digital:', error);
-        alert('Hubo un error al inicializar los datos del Atlas. Por favor, asegúrese de estar sirviendo el proyecto bajo un servidor HTTP.');
+        alert('Hubo un error al inicializar los datos del Atlas. Asegúrese de estar sirviendo el proyecto bajo un servidor HTTP.');
     }
 }
 
-// Configurar los Listeners del DOM
+// Configurar los listeners
 function setupEventListeners() {
-    // Enrutamiento mediante Hash
-    window.addEventListener('hashchange', handleRouting);
+    // Hamburger menu para móviles
+    const hamburger = document.getElementById('menuHamburger');
+    const navMenu = document.getElementById('navbarMenu');
     
-    // Sidebar Mobile Toggle
-    const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.getElementById('mobileNavToggle');
-    
-    if (toggleBtn && sidebar) {
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+        
+        // Cerrar menú al hacer clic en un ítem
+        navMenu.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+            });
         });
     }
     
-    // Cerrar sidebar si se hace clic fuera en móvil
-    document.addEventListener('click', (e) => {
-        if (window.innerWidth <= 992 && sidebar && sidebar.classList.contains('open')) {
-            if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
-                sidebar.classList.remove('open');
-            }
+    // Scroll aware navbar (sólido al scrollear)
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
         }
+        
+        // Scroll Spy para resaltar la sección activa
+        spyScrollHighlight();
     });
     
-    // Buscador Global
+    // Buscador Global en el Directorio
     const searchInput = document.getElementById('globalSearch');
     const clearSearchBtn = document.getElementById('clearSearchBtn');
     
@@ -94,7 +100,7 @@ function setupEventListeners() {
                 clearSearchBtn.style.display = currentSearchQuery ? 'block' : 'none';
             }
             
-            triggerCurrentViewRender();
+            renderOrganizaciones();
         });
     }
     
@@ -103,23 +109,7 @@ function setupEventListeners() {
             searchInput.value = '';
             currentSearchQuery = '';
             clearSearchBtn.style.display = 'none';
-            triggerCurrentViewRender();
-        });
-    }
-    
-    // Modal Close Listeners
-    const modal = document.getElementById('detailModal');
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
-    
-    if (modalCloseBtn) {
-        modalCloseBtn.addEventListener('click', closeDetailModal);
-    }
-    
-    if (modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeDetailModal();
-            }
+            renderOrganizaciones();
         });
     }
     
@@ -138,202 +128,96 @@ function setupEventListeners() {
         });
     }
     
-    // KPI card redirects
-    document.querySelectorAll('.kpi-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const targetTab = card.dataset.targetTab;
-            if (targetTab) {
-                window.location.hash = `#${targetTab}`;
+    // Tabs de Problemas y Soluciones
+    const tabProblemsBtn = document.getElementById('tabProblemsBtn');
+    const tabSolutionsBtn = document.getElementById('tabSolutionsBtn');
+    
+    if (tabProblemsBtn && tabSolutionsBtn) {
+        tabProblemsBtn.addEventListener('click', () => {
+            tabProblemsBtn.classList.add('active');
+            tabSolutionsBtn.classList.remove('active');
+            activeProblemsSolutionsTab = 'problems';
+            renderProblemasSoluciones();
+        });
+        
+        tabSolutionsBtn.addEventListener('click', () => {
+            tabSolutionsBtn.classList.add('active');
+            tabProblemsBtn.classList.remove('active');
+            activeProblemsSolutionsTab = 'solutions';
+            renderProblemasSoluciones();
+        });
+    }
+    
+    // Cerrar Modal
+    const modal = document.getElementById('detailModal');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeDetailModal);
+    }
+    
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeDetailModal();
             }
         });
+    }
+}
+
+// 3. Scroll Spy (Resalta el menú superior de acuerdo a la sección en pantalla)
+function spyScrollHighlight() {
+    const sections = document.querySelectorAll('.scroll-section, header.hero');
+    const navItems = document.querySelectorAll('.navbar-menu .menu-item');
+    
+    let currentId = 'inicio';
+    const scrollPosition = window.scrollY + 100; // offset
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            currentId = sectionId;
+        }
+    });
+    
+    // Normalizar ID por si cae en problemas o soluciones individuales
+    if (currentId === 'problemas-soluciones') {
+        currentId = 'problemas-soluciones';
+    }
+    
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        const href = item.getAttribute('href').replace('#', '');
+        
+        if (href === currentId) {
+            item.classList.add('active');
+        }
     });
 }
 
-// 3. Manejador de Enrutamiento (Hash Routing)
-function handleRouting() {
-    const hash = window.location.hash || '#inicio';
-    const viewName = hash.replace('#', '');
-    
-    switchView(viewName);
-}
+// 4. Renderizadores de Contenido
 
-// Cambiar de vista activa
-function switchView(viewName) {
-    // Ocultar todas las secciones
-    const views = document.querySelectorAll('.dashboard-view');
-    views.forEach(view => view.classList.remove('active'));
-    
-    // Desactivar todos los links de navegación
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => item.classList.remove('active'));
-    
-    // Activar sección correspondiente
-    const activeView = document.getElementById(`view-${viewName}`);
-    if (activeView) {
-        activeView.classList.add('active');
-    } else {
-        // Fallback a inicio
-        document.getElementById('view-inicio').classList.add('active');
-        viewName = 'inicio';
-    }
-    
-    // Activar link de navegación correspondiente
-    const activeNav = document.querySelector(`.nav-item[data-tab="${viewName}"]`);
-    if (activeNav) {
-        activeNav.classList.add('active');
-    }
-    
-    // Actualizar Breadcrumb y Título
-    const breadcrumb = document.getElementById('breadcrumb');
-    const titleEl = document.getElementById('current-view-title');
-    
-    const viewTitles = {
-        'inicio': { breadcrumb: 'Atlas de Modernización', title: 'Tablero de Control' },
-        'sectores': { breadcrumb: 'Sectores Críticos', title: 'Mapeo de Sectores' },
-        'organizaciones': { breadcrumb: 'Directorio y CRM', title: 'Organizaciones Prospectadas' },
-        'problemas': { breadcrumb: 'Catálogo de Dolores', title: 'Dolores Operativos Frecuentes' },
-        'soluciones': { breadcrumb: 'Modernización', title: 'Propuestas de Solución' },
-        'gestion-documental': { breadcrumb: 'Especialización', title: 'Gestión Documental + IA' },
-        'ia': { breadcrumb: 'Innovación Tecnológica', title: 'Ideas de Productos IA' },
-        'oportunidades': { breadcrumb: 'Priorización', title: 'Matriz de Oportunidades' }
-    };
-    
-    if (breadcrumb && titleEl && viewTitles[viewName]) {
-        breadcrumb.textContent = viewTitles[viewName].breadcrumb;
-        titleEl.textContent = viewTitles[viewName].title;
-    }
-    
-    // Renderizar los datos de la vista específica
-    renderViewData(viewName);
-    
-    // Cerrar sidebar en móvil si está abierto
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-        sidebar.classList.remove('open');
-    }
-}
-
-// Desencadena el render de la vista actual (útil para búsquedas en tiempo real)
-function triggerCurrentViewRender() {
-    const hash = window.location.hash || '#inicio';
-    const viewName = hash.replace('#', '');
-    renderViewData(viewName);
-}
-
-// 4. Renderizadores de Vistas Específicas
-function renderViewData(viewName) {
-    switch (viewName) {
-        case 'inicio':
-            buildDashboardKPIs();
-            buildProspectosPrioritarios();
-            break;
-        case 'sectores':
-            renderSectores();
-            break;
-        case 'organizaciones':
-            buildSectorFilterPills();
-            renderOrganizaciones();
-            break;
-        case 'problemas':
-            renderProblemas();
-            break;
-        case 'soluciones':
-            renderSoluciones();
-            break;
-        case 'gestion-documental':
-            renderGestionDocumentalEspecial();
-            break;
-        case 'ia':
-            renderIdeasIA();
-            break;
-        case 'oportunidades':
-            renderOportunidadesMatrix();
-            break;
-    }
-}
-
-// 5. Renderizado: INICIO (KPIs y Objetivos)
-function buildDashboardKPIs() {
+// KPIs del Hero
+function renderHeroKPIs() {
     document.getElementById('kpi-sectores').textContent = sectoresData.length;
     document.getElementById('kpi-organizaciones').textContent = organizacionesData.length;
     document.getElementById('kpi-problemas').textContent = problemasData.length;
     document.getElementById('kpi-soluciones').textContent = solucionesData.length;
-    
-    // Software Factories Count
-    const sfCount = organizacionesData.filter(o => o.sector === 'software-factories').length;
-    document.getElementById('kpi-fabricas-badge').textContent = `${sfCount} en Ecosistema`;
 }
 
-function buildProspectosPrioritarios() {
-    const container = document.getElementById('prospectos-prioritarios-list');
-    if (!container) return;
-    
-    // Filtrar pymes e instituciones con alta prioridad (sectores con prioridad >= 9) y madurez digital <= 3
-    const prioritarios = organizacionesData.filter(org => {
-        if (org.sector === 'software-factories') return false;
-        
-        const sectorObj = sectoresData.find(s => s.id === org.sector);
-        const prioridad = sectorObj ? sectorObj.prioridad : 8;
-        
-        return prioridad >= 9 && org.madurezDigital <= 3;
-    });
-    
-    // Aplicar búsqueda si la hay
-    const filtrados = prioritarios.filter(org => {
-        return org.nombre.toLowerCase().includes(currentSearchQuery) ||
-               org.ciudad.toLowerCase().includes(currentSearchQuery);
-    });
-    
-    if (filtrados.length === 0) {
-        container.innerHTML = `<div class="p-4 text-center text-muted">No hay objetivos prioritarios que coincidan con la búsqueda.</div>`;
-        return;
-    }
-    
-    let html = '';
-    filtrados.forEach(org => {
-        const sectorObj = sectoresData.find(s => s.id === org.sector);
-        const prioridadLabel = sectorObj ? `Prioridad ${sectorObj.prioridad}` : 'Prioridad Alta';
-        
-        html += `
-            <div class="prospects-list-item">
-                <div>
-                    <span class="org-name" onclick="openDetailModal('organizacion', '${org.id}')">${org.nombre}</span>
-                    <span class="d-block text-secondary" style="font-size: 0.75rem;">${sectorObj ? sectorObj.nombre : ''}</span>
-                </div>
-                <div class="org-city">${org.ciudad} (${org.provincia})</div>
-                <div class="org-priority">
-                    <span class="priority-badge priority-${sectorObj ? sectorObj.prioridad : '8'}">${prioridadLabel}</span>
-                </div>
-                <div class="action-cell">
-                    <button onclick="openDetailModal('organizacion', '${org.id}')">Ver Ficha</button>
-                </div>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
-
-// 6. Renderizado: SECTORES
+// Sectores
 function renderSectores() {
     const container = document.getElementById('sectores-grid');
     if (!container) return;
     
-    const filtrados = sectoresData.filter(sec => {
-        return sec.nombre.toLowerCase().includes(currentSearchQuery) ||
-               sec.descripcion.toLowerCase().includes(currentSearchQuery);
-    });
-    
-    if (filtrados.length === 0) {
-        container.innerHTML = `<div class="p-4 text-center text-muted col-span-full">No se encontraron sectores coincidentes.</div>`;
-        return;
-    }
-    
     let html = '';
-    filtrados.forEach(sec => {
-        // Encontrar dolores mapeados a este sector
+    sectoresData.forEach(sec => {
+        // Encontrar dolores de este sector
         const dolores = problemasData.filter(p => p.sectores.includes(sec.id) || p.sectores.includes('todos'));
-        // Encontrar soluciones mapeadas a este sector
+        // Encontrar soluciones de este sector
         const soluciones = solucionesData.filter(s => s.sectores.includes(sec.id) || s.sectores.includes('todos'));
         
         html += `
@@ -341,7 +225,6 @@ function renderSectores() {
                 <div class="card-header">
                     <div class="card-title">
                         <h4>${sec.nombre}</h4>
-                        ${sec.especializacion ? '<span class="promo-tag">ESPECIALIDAD</span>' : ''}
                     </div>
                     <span class="priority-badge priority-${sec.prioridad}">Prioridad ${sec.prioridad}</span>
                 </div>
@@ -349,21 +232,21 @@ function renderSectores() {
                     <p class="card-description">${sec.descripcion}</p>
                     
                     <div class="bullet-section">
-                        <span class="bullet-section-title">Dolores Frecuentes</span>
+                        <span class="bullet-section-title">Dolores Críticos</span>
                         <ul class="bullet-list">
-                            ${dolores.slice(0, 3).map(d => `<li>${d.nombre}</li>`).join('') || '<li>Sin dolores registrados</li>'}
+                            ${dolores.slice(0, 2).map(d => `<li>${d.nombre}</li>`).join('') || '<li>Sin dolores reportados</li>'}
                         </ul>
                     </div>
                     
                     <div class="bullet-section">
-                        <span class="bullet-section-title">Soluciones Sugeridas</span>
+                        <span class="bullet-section-title">Soluciones Clave</span>
                         <ul class="bullet-list solutions">
-                            ${soluciones.slice(0, 3).map(s => `<li>${s.nombre}</li>`).join('') || '<li>Consultar modernización</li>'}
+                            ${soluciones.slice(0, 2).map(s => `<li>${s.nombre}</li>`).join('') || '<li>Reunión de diagnóstico</li>'}
                         </ul>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <span class="text-secondary" style="font-size: 0.8rem;">Ver detalles y prospectos</span>
+                    <span>Ver ficha del sector</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
             </div>
@@ -373,12 +256,90 @@ function renderSectores() {
     container.innerHTML = html;
 }
 
-// 7. Renderizado: ORGANIZACIONES
+// Pestaña de Problemas y Soluciones
+function renderProblemasSoluciones() {
+    const container = document.getElementById('problemas-soluciones-grid');
+    if (!container) return;
+    
+    let html = '';
+    
+    if (activeProblemsSolutionsTab === 'problems') {
+        // Renderizar Problemas
+        problemasData.forEach(prob => {
+            const sectNombres = prob.sectores.map(id => {
+                if (id === 'todos') return 'Todos';
+                const s = sectoresData.find(sec => sec.id === id);
+                return s ? s.nombre : id;
+            });
+            
+            html += `
+                <div class="card" onclick="openDetailModal('problema', '${prob.id}')">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h4>${prob.nombre}</h4>
+                        </div>
+                        <span class="priority-badge priority-10">${prob.impacto} Impacto</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">${prob.descripcion}</p>
+                        
+                        <div class="bullet-section">
+                            <span class="bullet-section-title">Afecta a los sectores:</span>
+                            <div class="tag-list">
+                                ${sectNombres.map(name => `<span class="tag">${name}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Ver diagnóstico</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                    </div>
+                </div>
+            `;
+        });
+    } else {
+        // Renderizar Soluciones
+        solucionesData.forEach(sol => {
+            const sectNombres = sol.sectores.map(id => {
+                if (id === 'todos') return 'Todos';
+                const s = sectoresData.find(sec => sec.id === id);
+                return s ? s.nombre : id;
+            });
+            
+            html += `
+                <div class="card" onclick="openDetailModal('solucion', '${sol.id}')">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h4>${sol.nombre}</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">${sol.descripcion}</p>
+                        
+                        <div class="bullet-section">
+                            <span class="bullet-section-title">Aplicable en:</span>
+                            <div class="tag-list">
+                                ${sectNombres.map(name => `<span class="tag">${name}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Ver arquitectura técnica</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    
+    container.innerHTML = html;
+}
+
+// Cargar pills dinámicas del Sector en el Directorio
 function buildSectorFilterPills() {
     const container = document.getElementById('sector-filter-pills');
     if (!container) return;
     
-    // Limpiar dinámicos excepto el "Todos"
     const staticPill = container.querySelector('[data-sector="todos"]');
     container.innerHTML = '';
     container.appendChild(staticPill);
@@ -400,34 +361,36 @@ function buildSectorFilterPills() {
     });
 }
 
+// Renderizar el Directorio de Contactos
 function renderOrganizaciones() {
     const container = document.getElementById('organizaciones-grid');
     if (!container) return;
     
-    // Filtrar organizaciones por sector y provincia
     let filtrados = organizacionesData;
     
+    // Filtro de Sector
     if (activeSectorFilter !== 'todos') {
         filtrados = filtrados.filter(org => org.sector === activeSectorFilter);
     }
     
+    // Filtro de Provincia
     if (activeProvinciaFilter !== 'todas') {
         filtrados = filtrados.filter(org => org.provincia === activeProvinciaFilter);
     }
     
-    // Filtrar por buscador global
+    // Buscador
     if (currentSearchQuery) {
         filtrados = filtrados.filter(org => {
             const matchName = org.nombre.toLowerCase().includes(currentSearchQuery);
             const matchCity = org.ciudad.toLowerCase().includes(currentSearchQuery);
+            const matchContacto = org.contacto.persona.toLowerCase().includes(currentSearchQuery);
             const matchNotas = org.notas ? org.notas.toLowerCase().includes(currentSearchQuery) : false;
-            const matchContacto = org.contacto.persona ? org.contacto.persona.toLowerCase().includes(currentSearchQuery) : false;
-            return matchName || matchCity || matchNotas || matchContacto;
+            return matchName || matchCity || matchContacto || matchNotas;
         });
     }
     
     if (filtrados.length === 0) {
-        container.innerHTML = `<div class="p-4 text-center text-muted col-span-full">No se encontraron organizaciones para los filtros seleccionados.</div>`;
+        container.innerHTML = `<div class="p-4 text-center text-muted col-span-full">No se encontraron organizaciones con los filtros aplicados.</div>`;
         return;
     }
     
@@ -436,19 +399,16 @@ function renderOrganizaciones() {
         const sectorObj = sectoresData.find(s => s.id === org.sector);
         const starsHtml = getMaturityStars(org.madurezDigital);
         
-        // Botones de acción o notas
-        const notesHtml = org.notas ? `<div class="org-notes">${org.notas}</div>` : '';
-        
-        // Diferenciación visual si es software factory (ecosistema)
+        // Estilo diferenciador para Software Factories
         const isSF = org.sector === 'software-factories';
-        const cardClass = isSF ? 'org-card eco-system-card' : 'org-card';
+        const cardClass = isSF ? 'org-card ecosystem-card' : 'org-card';
         
         html += `
             <div class="${cardClass}">
                 <div>
                     <div class="org-meta">
                         <span class="org-city-badge">${org.ciudad} (${org.provincia})</span>
-                        <div class="org-maturity" title="Madurez Digital: ${org.madurezDigital}/5">
+                        <div class="org-maturity" title="Madurez digital: ${org.madurezDigital}/5">
                             ${starsHtml}
                         </div>
                     </div>
@@ -458,18 +418,17 @@ function renderOrganizaciones() {
                         <span class="org-sector-name">${sectorObj ? sectorObj.nombre : ''}</span>
                     </div>
                     
-                    ${notesHtml}
+                    ${org.notas ? `<div class="org-notes">${org.notas}</div>` : ''}
                     
                     <div class="contact-info-block">
-                        <p><span class="label">Contacto:</span> <span class="value">${org.contacto.persona}</span></p>
-                        <p><span class="label">Puesto:</span> <span class="value">${org.contacto.puesto}</span></p>
+                        <p><span class="label">Contacto:</span> <span class="value">${org.contacto.persona} (${org.contacto.puesto})</span></p>
                         <p><span class="label">Teléfono:</span> <a href="tel:${org.contacto.telefono}" class="value">${org.contacto.telefono}</a></p>
                         <p><span class="label">Email:</span> <a href="mailto:${org.contacto.email}" class="value">${org.contacto.email}</a></p>
                     </div>
                 </div>
                 
                 <div class="org-actions">
-                    <button class="btn btn-secondary btn-block" onclick="openDetailModal('organizacion', '${org.id}')">Ver Análisis Completo</button>
+                    <button class="btn btn-secondary btn-block" onclick="openDetailModal('organizacion', '${org.id}')">Ficha de Prospección</button>
                 </div>
             </div>
         `;
@@ -478,7 +437,7 @@ function renderOrganizaciones() {
     container.innerHTML = html;
 }
 
-// Genera representación visual por estrellas
+// Estrellas de madurez digital
 function getMaturityStars(stars) {
     let html = '';
     for (let i = 1; i <= 5; i++) {
@@ -491,268 +450,7 @@ function getMaturityStars(stars) {
     return html;
 }
 
-// 8. Renderizado: PROBLEMAS
-function renderProblemas() {
-    const container = document.getElementById('problemas-grid');
-    if (!container) return;
-    
-    const filtrados = problemasData.filter(prob => {
-        return prob.nombre.toLowerCase().includes(currentSearchQuery) ||
-               prob.descripcion.toLowerCase().includes(currentSearchQuery);
-    });
-    
-    if (filtrados.length === 0) {
-        container.innerHTML = `<div class="p-4 text-center text-muted col-span-full">No se encontraron problemas coincidentes.</div>`;
-        return;
-    }
-    
-    let html = '';
-    filtrados.forEach(prob => {
-        // Mapeo de nombres de sectores
-        const sectNombres = prob.sectores.map(id => {
-            if (id === 'todos') return 'Todos los sectores';
-            const sector = sectoresData.find(s => s.id === id);
-            return sector ? sector.nombre : id;
-        });
-        
-        html += `
-            <div class="card" onclick="openDetailModal('problema', '${prob.id}')">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h4>${prob.nombre}</h4>
-                    </div>
-                    <span class="priority-badge priority-10">${prob.impacto} Impacto</span>
-                </div>
-                <div class="card-body">
-                    <p class="card-description">${prob.descripcion}</p>
-                    
-                    <div class="bullet-section">
-                        <span class="bullet-section-title">Afecta a:</span>
-                        <div class="tag-list">
-                            ${sectNombres.map(name => `<span class="tag">${name}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span class="text-secondary" style="font-size: 0.8rem;">Ver detalle de problema</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-                </div>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
-
-// 9. Renderizado: SOLUCIONES
-function renderSoluciones() {
-    const container = document.getElementById('soluciones-grid');
-    if (!container) return;
-    
-    const filtrados = solucionesData.filter(sol => {
-        return sol.nombre.toLowerCase().includes(currentSearchQuery) ||
-               sol.descripcion.toLowerCase().includes(currentSearchQuery);
-    });
-    
-    if (filtrados.length === 0) {
-        container.innerHTML = `<div class="p-4 text-center text-muted col-span-full">No se encontraron soluciones coincidentes.</div>`;
-        return;
-    }
-    
-    let html = '';
-    filtrados.forEach(sol => {
-        const sectNombres = sol.sectores.map(id => {
-            if (id === 'todos') return 'Todos los sectores';
-            const sector = sectoresData.find(s => s.id === id);
-            return sector ? sector.nombre : id;
-        });
-        
-        html += `
-            <div class="card" onclick="openDetailModal('solucion', '${sol.id}')">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h4>${sol.nombre}</h4>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p class="card-description">${sol.descripcion}</p>
-                    
-                    <div class="bullet-section">
-                        <span class="bullet-section-title">Aplicable A:</span>
-                        <div class="tag-list">
-                            ${sectNombres.map(name => `<span class="tag">${name}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span class="text-secondary" style="font-size: 0.8rem;">Ver arquitectura técnica</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-                </div>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
-
-// 10. Renderizado: ESPECIAL GESTIÓN DOCUMENTAL + IA
-function renderGestionDocumentalEspecial() {
-    const container = document.getElementById('special-prospects-list');
-    if (!container) return;
-    
-    // Filtrar organizaciones que sufren por 'documentacion-dispersa' o que tienen soluciones asociadas de gestión documental / RAG
-    const targetOrgs = organizacionesData.filter(org => {
-        if (org.sector === 'software-factories') return false;
-        
-        const tieneDolorDoc = org.dolores.includes('documentacion-dispersa');
-        const tieneOpDoc = org.oportunidades.includes('workflow-documental') || org.oportunidades.includes('rag-documental');
-        const esSectorGestionDoc = org.sector === 'gestion-documental-ia';
-        
-        return tieneDolorDoc || tieneOpDoc || esSectorGestionDoc;
-    });
-    
-    // Filtrar por buscador
-    const filtrados = targetOrgs.filter(org => {
-        return org.nombre.toLowerCase().includes(currentSearchQuery) ||
-               org.ciudad.toLowerCase().includes(currentSearchQuery);
-    });
-    
-    if (filtrados.length === 0) {
-        container.innerHTML = `<div class="p-2 text-center text-muted">Ningún prospecto coincidente con dolores documentales o de IA.</div>`;
-        return;
-    }
-    
-    let html = '';
-    filtrados.forEach(org => {
-        html += `
-            <div class="mini-org-item" onclick="openDetailModal('organizacion', '${org.id}')">
-                <div>
-                    <span class="name">${org.nombre}</span>
-                    <span class="d-block text-secondary" style="font-size: 0.72rem;">Dolores: ${org.dolores.join(', ') || 'Varios'}</span>
-                </div>
-                <span class="city">${org.ciudad}</span>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
-
-// 11. Renderizado: IDEAS IA
-function renderIdeasIA() {
-    const container = document.getElementById('ideas-grid');
-    if (!container) return;
-    
-    const filtrados = ideasData.filter(idea => {
-        return idea.titulo.toLowerCase().includes(currentSearchQuery) ||
-               idea.descripcion.toLowerCase().includes(currentSearchQuery) ||
-               idea.tecnologias.some(tech => tech.toLowerCase().includes(currentSearchQuery));
-    });
-    
-    if (filtrados.length === 0) {
-        container.innerHTML = `<div class="p-4 text-center text-muted col-span-full">No se encontraron ideas de IA coincidentes.</div>`;
-        return;
-    }
-    
-    let html = '';
-    filtrados.forEach(idea => {
-        let stateClass = 'roi-medium';
-        if (idea.estado === 'Prototipo') stateClass = 'roi-high';
-        if (idea.estado === 'Idea') stateClass = 'complexity-low';
-        
-        html += `
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h4>${idea.titulo}</h4>
-                    </div>
-                    <span class="roi-badge ${stateClass}">${idea.estado}</span>
-                </div>
-                <div class="card-body">
-                    <p class="card-description">${idea.descripcion}</p>
-                    
-                    <div class="bullet-section">
-                        <span class="bullet-section-title">Componentes Stack</span>
-                        <div class="tag-list">
-                            ${idea.tecnologias.map(tech => `<span class="tag" style="border-color: rgba(129, 140, 248, 0.4); color: var(--accent-indigo);">${tech}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span class="text-secondary" style="font-size: 0.8rem;">Oportunidad de desarrollo local</span>
-                </div>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
-
-// 12. Renderizado: MATRIZ DE OPORTUNIDADES
-function renderOportunidadesMatrix() {
-    const container = document.getElementById('oportunidades-table-body');
-    if (!container) return;
-    
-    const filtrados = solucionesData.filter(sol => {
-        return sol.nombre.toLowerCase().includes(currentSearchQuery) ||
-               sol.descripcion.toLowerCase().includes(currentSearchQuery);
-    });
-    
-    if (filtrados.length === 0) {
-        container.innerHTML = `<tr><td colspan="6" class="text-center text-muted">No se encontraron soluciones para poblar la matriz.</td></tr>`;
-        return;
-    }
-    
-    // Mapear ROI y Complejidad ficticia pero justificada para priorizar
-    const metricaSoluciones = {
-        'crm-light': { roi: 'Alto', complexity: 'Baja', viability: '10/10', action: 'Propuesta rápida (WhatsApp)' },
-        'rag-documental': { roi: 'Alto', complexity: 'Media', viability: '9/10', action: 'Demostración de prototipo RAG' },
-        'workflow-documental': { roi: 'Alto', complexity: 'Media', viability: '8/10', action: 'Modernización de expedientes' },
-        'dashboard-ejecutivo': { roi: 'Medio', complexity: 'Media', viability: '7/10', action: 'Conectores SQL a dashboards' },
-        'automatizacion-afip': { roi: 'Alto', complexity: 'Baja', viability: '10/10', action: 'Presentar bot recolector de facturas' },
-        'sistema-turnos-notificacion': { roi: 'Medio', complexity: 'Baja', viability: '9/10', action: 'Demo agenda de citas' }
-    };
-    
-    let html = '';
-    filtrados.forEach(sol => {
-        const metrics = metricaSoluciones[sol.id] || { roi: 'Medio', complexity: 'Media', viability: '7/10', action: 'Reunión de diagnóstico' };
-        
-        const roiClass = metrics.roi === 'Alto' ? 'roi-high' : 'roi-medium';
-        const compClass = metrics.complexity === 'Alta' ? 'complexity-high' : (metrics.complexity === 'Media' ? 'complexity-medium' : 'complexity-low');
-        
-        const sectTags = sol.sectores.map(id => {
-            if (id === 'todos') return 'Todos';
-            const sector = sectoresData.find(s => s.id === id);
-            return sector ? sector.nombre : id;
-        });
-        
-        html += `
-            <tr>
-                <td>
-                    <span class="sol-name" style="cursor:pointer;" onclick="openDetailModal('solucion', '${sol.id}')">${sol.nombre}</span>
-                    <span class="d-block text-secondary" style="font-size: 0.72rem; max-width: 250px;">${sol.descripcion}</span>
-                </td>
-                <td>
-                    <div class="sect-tags">
-                        ${sectTags.map(t => `<span class="tag">${t}</span>`).join('')}
-                    </div>
-                </td>
-                <td><span class="roi-badge ${roiClass}">${metrics.roi}</span></td>
-                <td><span class="complexity-badge ${compClass}">${metrics.complexity}</span></td>
-                <td><span class="viability-score">${metrics.viability}</span></td>
-                <td>
-                    <button class="btn btn-secondary btn-block" style="padding: 6px 12px; font-size: 0.75rem;" onclick="openDetailModal('solucion', '${sol.id}')">
-                        ${metrics.action}
-                    </button>
-                </td>
-            </tr>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
-
-// 13. Lógica del Detalle Modal (Fichas Técnicas / CRM)
+// 5. Apertura/Cierre de Modales (Ficha CRM)
 function openDetailModal(type, id) {
     const modal = document.getElementById('detailModal');
     const body = document.getElementById('modalDetailsBody');
@@ -767,7 +465,6 @@ function openDetailModal(type, id) {
         const sectorObj = sectoresData.find(s => s.id === org.sector);
         const starsHtml = getMaturityStars(org.madurezDigital);
         
-        // Mapeo detallado de dolores y soluciones de esta organización
         const doloresMapeados = org.dolores.map(dId => problemasData.find(p => p.id === dId)).filter(Boolean);
         const solucionesMapeadas = org.oportunidades.map(sId => solucionesData.find(s => s.id === sId)).filter(Boolean);
         
@@ -779,40 +476,42 @@ function openDetailModal(type, id) {
             
             <div class="modal-body-section">
                 <div class="org-meta" style="margin-bottom: 0;">
-                    <div class="org-maturity" style="font-size: 1.2rem;">
-                        ${starsHtml} <span class="text-secondary" style="font-size: 0.85rem; margin-left: 8px;">Madurez Digital (${org.madurezDigital}/5)</span>
+                    <div class="org-maturity" style="font-size: 1.1rem; color: var(--accent-amber);">
+                        ${starsHtml} <span class="text-secondary" style="font-size: 0.85rem; margin-left: 8px;">Madurez digital (${org.madurezDigital}/5)</span>
                     </div>
                 </div>
                 
                 <div class="modal-section-block">
-                    <h5>Información de Contacto Comercial</h5>
+                    <h5>Contacto Directo</h5>
                     <p style="margin-top: 8px;"><strong>Representante:</strong> ${org.contacto.persona} (${org.contacto.puesto})</p>
                     <p><strong>Teléfono:</strong> <a href="tel:${org.contacto.telefono}">${org.contacto.telefono}</a></p>
                     <p><strong>Email:</strong> <a href="mailto:${org.contacto.email}">${org.contacto.email}</a></p>
                 </div>
                 
-                ${org.notas ? `
+                ${org.notes || org.notas ? `
                     <div class="modal-section-block" style="border-left: 4px solid var(--accent-amber); background: rgba(251, 191, 36, 0.02);">
-                        <h5>Notas de Diagnóstico del Consultor</h5>
-                        <p style="margin-top: 8px; font-style: italic; font-size: 0.88rem; line-height: 1.5;">"${org.notas}"</p>
+                        <h5>Notas comerciales de prospección</h5>
+                        <p style="margin-top: 8px; font-style: italic; font-size: 0.88rem; line-height: 1.5;">"${org.notes || org.notas}"</p>
                     </div>
                 ` : ''}
                 
-                <div class="grid-layout" style="grid-template-columns: 1fr 1fr; gap: 16px;">
-                    <div class="modal-section-block">
-                        <h5>Dolores Identificados</h5>
-                        <ul class="bullet-list" style="margin-top: 8px;">
-                            ${doloresMapeados.map(d => `<li><strong>${d.nombre}:</strong> ${d.descripcion}</li>`).join('') || '<li>Ninguno reportado</li>'}
-                        </ul>
+                ${!org.sector.includes('software-factories') ? `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="modal-section-block">
+                            <h5>Dolores Frecuentes</h5>
+                            <ul class="bullet-list" style="margin-top: 8px; font-size:0.85rem;">
+                                ${doloresMapeados.map(d => `<li><strong>${d.nombre}</strong></li>`).join('') || '<li>Sin dolores identificados</li>'}
+                            </ul>
+                        </div>
+                        
+                        <div class="modal-section-block">
+                            <h5>Oportunidades de Solución</h5>
+                            <ul class="bullet-list solutions" style="margin-top: 8px; font-size:0.85rem;">
+                                ${solucionesMapeadas.map(s => `<li><strong>${s.nombre}</strong></li>`).join('') || '<li>Diagnóstico pendiente</li>'}
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="modal-section-block">
-                        <h5>Propuesta de Modernización</h5>
-                        <ul class="bullet-list solutions" style="margin-top: 8px;">
-                            ${solucionesMapeadas.map(s => `<li><strong>${s.nombre}:</strong> ${s.descripcion}</li>`).join('') || '<li>Diagnóstico en curso</li>'}
-                        </ul>
-                    </div>
-                </div>
+                ` : ''}
                 
                 <div style="margin-top: 12px; display:flex; gap: 10px;">
                     <a href="https://wa.me/${org.contacto.telefono.replace(/[^0-9]/g, '')}" target="_blank" class="btn btn-primary text-center" style="flex:1;">
@@ -834,35 +533,35 @@ function openDetailModal(type, id) {
         html += `
             <div class="modal-header-section">
                 <h3>Sector: ${sec.nombre}</h3>
-                <span class="subtitle">Prioridad Comercial: ${sec.prioridad}/10</span>
+                <span class="subtitle">Prioridad de modernización: ${sec.prioridad}/10</span>
             </div>
             <div class="modal-body-section">
                 <div class="modal-section-block">
-                    <h5>Descripción</h5>
+                    <h5>Descripción de mercado</h5>
                     <p style="margin-top: 8px; line-height: 1.5;">${sec.descripcion}</p>
                 </div>
                 
                 <div class="modal-section-block">
-                    <h5>Problemas Asociados</h5>
-                    <ul class="bullet-list" style="margin-top: 8px;">
-                        ${dolores.map(d => `<li><strong>${d.nombre}</strong> — ${d.descripcion}</li>`).join('') || '<li>Sin problemas mapeados</li>'}
+                    <h5>Dolores recurrentes del sector</h5>
+                    <ul class="bullet-list" style="margin-top: 8px; font-size:0.88rem;">
+                        ${dolores.map(d => `<li><strong>${d.nombre}:</strong> ${d.descripcion}</li>`).join('') || '<li>Sin dolores mapeados</li>'}
                     </ul>
                 </div>
                 
                 <div class="modal-section-block">
-                    <h5>Soluciones Aplicables</h5>
-                    <ul class="bullet-list solutions" style="margin-top: 8px;">
-                        ${soluciones.map(s => `<li><strong>${s.nombre}</strong> — ${s.descripcion}</li>`).join('') || '<li>Sin soluciones mapeadas</li>'}
+                    <h5>Catálogo de soluciones sugeridas</h5>
+                    <ul class="bullet-list solutions" style="margin-top: 8px; font-size:0.88rem;">
+                        ${soluciones.map(s => `<li><strong>${s.nombre}:</strong> ${s.descripcion}</li>`).join('') || '<li>Sin soluciones mapeadas</li>'}
                     </ul>
                 </div>
                 
                 <div class="modal-section-block">
-                    <h5>Organizaciones en el Atlas (${organizaciones.length})</h5>
-                    <div class="mini-orgs-list" style="margin-top: 8px; max-height: 150px; overflow-y:auto;">
+                    <h5>Organizaciones mapeadas (${organizaciones.length})</h5>
+                    <div class="mini-orgs-list" style="margin-top: 8px; max-height: 140px; overflow-y:auto; display:flex; flex-direction:column; gap: 8px;">
                         ${organizaciones.map(o => `
-                            <div class="mini-org-item" onclick="openDetailModal('organizacion', '${o.id}')">
-                                <span class="name">${o.nombre}</span>
-                                <span class="city">${o.ciudad} (${o.provincia})</span>
+                            <div class="mini-org-item" onclick="openDetailModal('organizacion', '${o.id}')" style="background-color: var(--bg-main); border:1px solid var(--border-color); padding: 8px 12px; border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center; cursor:pointer;">
+                                <span style="font-weight:600; font-size:0.85rem;">${o.nombre}</span>
+                                <span style="font-size:0.75rem; color:var(--text-secondary);">${o.ciudad} (${o.provincia})</span>
                             </div>
                         `).join('') || '<div class="text-muted text-center" style="font-size:0.8rem;">No hay empresas registradas para este sector.</div>'}
                     </div>
@@ -891,12 +590,12 @@ function openDetailModal(type, id) {
             </div>
             <div class="modal-body-section">
                 <div class="modal-section-block">
-                    <h5>Detalle del Problema</h5>
-                    <p style="margin-top: 8px; line-height:1.5;">${prob.descripcion}</p>
+                    <h5>Detalle de la problemática</h5>
+                    <p style="margin-top: 8px; line-height: 1.5;">${prob.descripcion}</p>
                 </div>
                 
                 <div class="modal-section-block">
-                    <h5>Sectores Afectados</h5>
+                    <h5>Sectores afectados</h5>
                     <div class="tag-list" style="margin-top: 8px;">
                         ${sectNombres.map(name => `<span class="tag">${name}</span>`).join('')}
                     </div>
@@ -915,17 +614,17 @@ function openDetailModal(type, id) {
         html += `
             <div class="modal-header-section">
                 <h3>Solución: ${sol.nombre}</h3>
-                <span class="subtitle">Propuesta Arquitectónica de Modernización</span>
+                <span class="subtitle">Propuesta técnica de valor</span>
             </div>
             <div class="modal-body-section">
                 <div class="modal-section-block">
-                    <h5>Detalle de la Propuesta</h5>
+                    <h5>Descripción técnica</h5>
                     <p style="margin-top: 8px; line-height: 1.5;">${sol.descripcion}</p>
                 </div>
                 
                 <div class="modal-section-block">
-                    <h5>Valor del Proyecto</h5>
-                    <p style="margin-top: 8px; font-size:0.88rem; line-height:1.5;">Se implementa mediante un análisis consultivo de procesos, garantizando la integración con el ecosistema de Software Factories local si se requiere desarrollo a medida de alta escala, o utilizando arquitecturas empaquetadas basadas en microservicios APIs para una respuesta rápida.</p>
+                    <h5>Implementación comercial</h5>
+                    <p style="margin-top: 8px; font-size: 0.88rem; line-height:1.5;">Esta solución se plantea como una modernización directa de procesos de negocio. Permite reducir tiempos de trabajo, evitar errores humanos, y centralizar datos para auditoría rápida y reporting de gestión.</p>
                 </div>
                 
                 <div style="margin-top: 8px; text-align:right;">

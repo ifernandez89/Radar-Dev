@@ -14,7 +14,7 @@
     },
     "dolores": [],
     "oportunidades": [],
-    "notas": "Software Factory enfocada en IA y modernización de procesos para medianas empresas. Sirve como referencia de mercado y potencial aliado para derivaciones."
+    "notas": "Software Factory enfocada en modernización de procesos para medianas empresas. Sirve como referencia de mercado y potencial aliado para derivaciones."
   },
   {
     "id": "ilusoft",
@@ -132,8 +132,8 @@
       "email": "sromero@clinicadelaciudad.com.ar"
     },
     "dolores": ["turnos-caoticos", "documentacion-dispersa"],
-    "oportunidades": ["sistema-turnos-notificacion", "rag-documental"],
-    "notas": "Historias clínicas dispersas en PDFs escaneados y carpetas físicas. Interés en asistente de IA para buscar síntomas históricos en legajos viejos."
+    "oportunidades": ["sistema-turnos-notificacion", "workflow-documental"],
+    "notas": "Historias clínicas y fichas dispersas en carpetas físicas y PDFs sin orden. Interés en digitalización estructurada."
   },
   {
     "id": "distribuidora-del-centro",
@@ -166,8 +166,8 @@
       "email": "dfontana@itsparanar.edu.ar"
     },
     "dolores": ["documentacion-dispersa", "excel-eterno"],
-    "oportunidades": ["workflow-documental", "rag-documental"],
-    "notas": "Gestión de actas de exámenes, legajos estudiantiles y notas en carpetas físicas. Necesitan firmar actas digitalmente y automatizar su archivo."
+    "oportunidades": ["workflow-documental"],
+    "notas": "Gestión de actas de exámenes, legajos estudiantiles y notas en carpetas físicas. Necesitan digitalizar y agilizar su archivo."
   },
   {
     "id": "cooperativa-agricola-crespo",
@@ -200,7 +200,7 @@
       "email": "epignolo@metalurgicarosario.com"
     },
     "dolores": ["sistemas-legacy", "documentacion-dispersa"],
-    "oportunidades": ["dashboard-ejecutivo", "rag-documental"],
-    "notas": "Tienen un sistema AS400 sólido pero inaccesible para generar reportes en tiempo real. Placa de control de producción manual."
+    "oportunidades": ["dashboard-ejecutivo"],
+    "notas": "Tienen un sistema AS400 sólido pero inaccesible para generar reportes en tiempo real. Planificación de planta manual."
   }
 ]

@@ -12,373 +12,173 @@
 </head>
 <body class="dark-theme">
     
-    <!-- App Container -->
-    <div class="app-container">
-        
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-brand">
+    <!-- Top Sticky Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="#inicio" class="navbar-brand">
                 <div class="brand-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
                 </div>
-                <div class="brand-text">
-                    <h1>Radar Dev</h1>
-                    <span>ATLAS DIGITAL</span>
-                </div>
+                <span>Radar Dev <small>/ Atlas Digital</small></span>
+            </a>
+            
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="#inicio" class="menu-item active">Inicio</a>
+                <a href="#sectores" class="menu-item">Sectores</a>
+                <a href="#problemas-soluciones" class="menu-item">Problemas y Soluciones</a>
+                <a href="#directorio" class="menu-item">Directorio de Contactos</a>
             </div>
             
-            <nav class="sidebar-nav">
-                <a href="#inicio" class="nav-item active" data-tab="inicio">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    <span>Inicio</span>
-                </a>
-                <a href="#sectores" class="nav-item" data-tab="sectores">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                    <span>Sectores</span>
-                </a>
-                <a href="#organizaciones" class="nav-item" data-tab="organizaciones">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    <span>Organizaciones</span>
-                </a>
-                <a href="#problemas" class="nav-item" data-tab="problemas">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    <span>Problemas</span>
-                </a>
-                <a href="#soluciones" class="nav-item" data-tab="soluciones">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                    <span>Soluciones</span>
-                </a>
-                
-                <div class="nav-divider">Especialización</div>
-                
-                <a href="#gestion-documental" class="nav-item specialty" data-tab="gestion-documental">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                    <span>Gestión Doc. + IA</span>
-                </a>
-                
-                <a href="#ia" class="nav-item" data-tab="ia">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-                    <span>Ideas IA</span>
-                </a>
-                <a href="#oportunidades" class="nav-item" data-tab="oportunidades">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                    <span>Oportunidades</span>
-                </a>
-            </nav>
-            
-            <div class="sidebar-footer">
-                <div class="consultant-badge">
-                    <div class="avatar">C</div>
-                    <div class="details">
-                        <p class="name">Consultor Dev</p>
-                        <p class="role">Modernización</p>
-                    </div>
-                </div>
-            </div>
-        </aside>
-        
-        <!-- Toggle button for mobile -->
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-        
-        <!-- Main Content Area -->
-        <div class="main-panel">
-            
-            <!-- Global Header -->
-            <header class="main-header">
-                <div class="header-title">
-                    <span class="breadcrumb" id="breadcrumb">Atlas de Modernización</span>
-                    <h2 id="current-view-title">Tablero de Control</h2>
-                </div>
-                
-                <div class="header-actions">
-                    <!-- Search Bar -->
-                    <div class="search-bar">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                        <input type="text" id="globalSearch" placeholder="Buscar sectores, pymes, soluciones, tecnologías...">
-                        <button class="clear-search" id="clearSearchBtn" aria-label="Limpiar búsqueda">&times;</button>
-                    </div>
-                    
-                    <!-- Date Badge -->
-                    <div class="date-badge">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        <span id="currentDate">2026-06-29</span>
-                    </div>
-                </div>
-            </header>
-            
-            <!-- View Containers -->
-            <main class="content-body">
-                
-                <!-- 1. VIEW: INICIO (Dashboard Summary) -->
-                <section id="view-inicio" class="dashboard-view active">
-                    <div class="welcome-banner">
-                        <div class="welcome-text">
-                            <h3>Bienvenido al Atlas de Modernización Digital</h3>
-                            <p>Mapeo estratégico de sectores privados e instituciones no estatales en Entre Ríos, Santa Fe y Córdoba. Identificación de dolores operativos y oportunidades concretas donde el cambio tecnológico es inevitable.</p>
-                        </div>
-                        <div class="welcome-badge">
-                            <span class="badge-status-glow">ESTRATEGIA 2026</span>
-                        </div>
-                    </div>
-                    
-                    <!-- KPI Cards Grid -->
-                    <div class="kpi-grid">
-                        <div class="kpi-card" data-target-tab="sectores">
-                            <div class="kpi-icon icon-sectores">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                            </div>
-                            <div class="kpi-details">
-                                <span class="kpi-value" id="kpi-sectores">0</span>
-                                <span class="kpi-label">Sectores Analizados</span>
-                            </div>
-                            <div class="kpi-trend positive">Foco Privado</div>
-                        </div>
-                        
-                        <div class="kpi-card" data-target-tab="organizaciones">
-                            <div class="kpi-icon icon-orgs">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                            </div>
-                            <div class="kpi-details">
-                                <span class="kpi-value" id="kpi-organizaciones">0</span>
-                                <span class="kpi-label">Org. Prospectadas</span>
-                            </div>
-                            <div class="kpi-trend warning" id="kpi-fabricas-badge">0 Ecosistema</div>
-                        </div>
-                        
-                        <div class="kpi-card" data-target-tab="problemas">
-                            <div class="kpi-icon icon-problemas">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
-                            </div>
-                            <div class="kpi-details">
-                                <span class="kpi-value" id="kpi-problemas">0</span>
-                                <span class="kpi-label">Problemas Detectados</span>
-                            </div>
-                            <div class="kpi-trend danger">Dolores Reales</div>
-                        </div>
-                        
-                        <div class="kpi-card" data-target-tab="soluciones">
-                            <div class="kpi-icon icon-soluciones">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
-                            </div>
-                            <div class="kpi-details">
-                                <span class="kpi-value" id="kpi-soluciones">0</span>
-                                <span class="kpi-label">Soluciones Listas</span>
-                            </div>
-                            <div class="kpi-trend info">ROI Estimado</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Middle Dashboard Section -->
-                    <div class="dashboard-grid">
-                        <!-- Agenda de Contacto Directo -->
-                        <div class="dashboard-panel-card">
-                            <div class="panel-card-header">
-                                <h4>🎯 Agenda de Prospección Directa (Objetivos Prioritarios)</h4>
-                                <span class="panel-subtitle">Clientes detectados con baja madurez digital pero alta prioridad de dolor</span>
-                            </div>
-                            <div class="panel-card-body" id="prospectos-prioritarios-list">
-                                <!-- Dynamic List -->
-                            </div>
-                        </div>
-                        
-                        <!-- Especialización IA Promoted -->
-                        <div class="dashboard-panel-card specialty-promo">
-                            <div class="panel-card-header">
-                                <span class="promo-tag">DIFERENCIADOR ÚNICO</span>
-                                <h4>📂 Enfoque: Gestión Documental + IA</h4>
-                            </div>
-                            <div class="panel-card-body">
-                                <p>No compitas como desarrollador generalista. El mercado regional demanda digitalización y firma de legajos junto a asistentes inteligentes locales (RAG).</p>
-                                <div class="tech-stack-pills">
-                                    <span>NestJS</span>
-                                    <span>NextJS</span>
-                                    <span>Alfresco</span>
-                                    <span>pgvector</span>
-                                    <span>Ollama</span>
-                                    <span>Firma Digital</span>
-                                </div>
-                                <a href="#gestion-documental" class="btn btn-primary btn-block text-center">Ver Arquitectura & Oportunidades</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                
-                <!-- 2. VIEW: SECTORES -->
-                <section id="view-sectores" class="dashboard-view">
-                    <div class="view-intro">
-                        <p>Los sectores prioritarios donde la falta de digitalización genera dolores insostenibles y donde el retorno de inversión es inmediato.</p>
-                    </div>
-                    <div class="grid-layout" id="sectores-grid">
-                        <!-- Dynamic content -->
-                    </div>
-                </section>
-                
-                <!-- 3. VIEW: ORGANIZACIONES (Directory) -->
-                <section id="view-organizaciones" class="dashboard-view">
-                    <div class="filter-header">
-                        <div class="filter-group">
-                            <label>Filtrar por Sector:</label>
-                            <div class="filter-pills" id="sector-filter-pills">
-                                <button class="filter-pill active" data-sector="todos">Todos</button>
-                                <!-- Dynamic pills -->
-                            </div>
-                        </div>
-                        
-                        <div class="filter-group">
-                            <label>Filtrar por Provincia:</label>
-                            <div class="filter-pills" id="provincia-filter-pills">
-                                <button class="filter-pill active" data-provincia="todas">Todas</button>
-                                <button class="filter-pill" data-provincia="Entre Ríos">Entre Ríos</button>
-                                <button class="filter-pill" data-provincia="Santa Fe">Santa Fe</button>
-                                <button class="filter-pill" data-provincia="Córdoba">Córdoba</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="directory-grid" id="organizaciones-grid">
-                        <!-- Dynamic cards -->
-                    </div>
-                </section>
-                
-                <!-- 4. VIEW: PROBLEMAS -->
-                <section id="view-problemas" class="dashboard-view">
-                    <div class="view-intro">
-                        <p>Catálogo de cuellos de botella operativos detectados con frecuencia en empresas locales.</p>
-                    </div>
-                    <div class="grid-layout" id="problemas-grid">
-                        <!-- Dynamic content -->
-                    </div>
-                </section>
-                
-                <!-- 5. VIEW: SOLUCIONES -->
-                <section id="view-soluciones" class="dashboard-view">
-                    <div class="view-intro">
-                        <p>Arquitecturas y propuestas de modernización de procesos orientadas a reducir la fricción operativa.</p>
-                    </div>
-                    <div class="grid-layout" id="soluciones-grid">
-                        <!-- Dynamic content -->
-                    </div>
-                </section>
-                
-                <!-- 6. VIEW: GESTIÓN DOCUMENTAL + IA (Special View) -->
-                <section id="view-gestion-documental" class="dashboard-view">
-                    <div class="special-hero">
-                        <div class="special-badge">CATEGORÍA EXCLUSIVA</div>
-                        <h3>Modernización Documental con Inteligencia Artificial</h3>
-                        <p>Fusión del backend corporativo con inteligencia artificial local e infraestructura de firmas autorizadas. Solución de alta gama diseñada para instituciones académicas, cooperativas, clínicas y estudios jurídicos.</p>
-                    </div>
-                    
-                    <div class="special-layout-grid">
-                        <!-- Architecture flow schematic -->
-                        <div class="architecture-card">
-                            <h4>🛠️ Arquitectura Tecnológica Sugerida</h4>
-                            <div class="architecture-flow">
-                                <div class="flow-step">
-                                    <div class="step-num">1</div>
-                                    <div class="step-details">
-                                        <h5>Presentación (Next.js)</h5>
-                                        <p>Interfaz web reactiva y fluida, optimizada para carga móvil y carga de archivos PDF.</p>
-                                    </div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="step-num">2</div>
-                                    <div class="step-details">
-                                        <h5>API Gateway (NestJS)</h5>
-                                        <p>Orquestación segura, validación de firmas digitales y control de accesos.</p>
-                                    </div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="step-num">3</div>
-                                    <div class="step-details">
-                                        <h5>Gestor Documental (Alfresco / OpenKM)</h5>
-                                        <p>Repositorio centralizado con estándares corporativos y control de versiones.</p>
-                                    </div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="step-num">4</div>
-                                    <div class="step-details">
-                                        <h5>Buscador Semántico & IA (pgvector + Ollama)</h5>
-                                        <p>Indexador de embeddings de PDFs en base de datos vectorial para consultas contextuales con LLMs locales sin fugar información confidencial.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Value proposal info -->
-                        <div class="proposal-card">
-                            <h4>💡 Ventajas Competitivas para el Consultor</h4>
-                            <ul class="proposal-benefits">
-                                <li>
-                                    <strong>Consultor, no Programador:</strong> Se plantea el proyecto como un servicio de modernización administrativa, no como simple "desarrollo de código".
-                                </li>
-                                <li>
-                                    <strong>Seguridad de Datos Locales:</strong> Con Ollama y pgvector en servidores de la empresa/institución, se garantiza confidencialidad total (sin enviar datos médicos o contables a APIs extranjeras).
-                                </li>
-                                <li>
-                                    <strong>Validez Legal Integrada:</strong> La incorporación de Firma Digital de acuerdo a la Ley Nacional 25.506 previene el fraude y formaliza actas de manera inequívoca.
-                                </li>
-                                <li>
-                                    <strong>Modernización Inevitable:</strong> Reemplaza el papeleo y las búsquedas manuales de hasta 2 horas en legajos físicos por una respuesta en 3 segundos en un chat de IA.
-                                </li>
-                            </ul>
-                            
-                            <div class="prospects-special-mapping">
-                                <h5>🎯 Organizaciones con Necesidad Inmediata:</h5>
-                                <div id="special-prospects-list" class="mini-orgs-list">
-                                    <!-- Dynamic list of targeted clinics, educational centers, or law offices -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                
-                <!-- 7. VIEW: IA IDEAS -->
-                <section id="view-ia" class="dashboard-view">
-                    <div class="view-intro">
-                        <p>Ideas de productos y microservicios basados en automatización e Inteligencia Artificial para prospectar en la región.</p>
-                    </div>
-                    <div class="grid-layout" id="ideas-grid">
-                        <!-- Dynamic content -->
-                    </div>
-                </section>
-                
-                <!-- 8. VIEW: OPORTUNIDADES MATRIX -->
-                <section id="view-oportunidades" class="dashboard-view">
-                    <div class="view-intro">
-                        <p>Matriz de decisión comercial. Permite priorizar qué soluciones proponer primero basándose en el retorno de inversión (ROI) estimado y la complejidad técnica.</p>
-                    </div>
-                    
-                    <div class="opportunities-table-container">
-                        <table class="opportunities-table">
-                            <thead>
-                                <tr>
-                                    <th>Solución</th>
-                                    <th>Sectores Destino</th>
-                                    <th>ROI Estimado</th>
-                                    <th>Complejidad</th>
-                                    <th>Viabilidad Comercial</th>
-                                    <th>Acción Comercial</th>
-                                </tr>
-                            </thead>
-                            <tbody id="oportunidades-table-body">
-                                <!-- Dynamic content -->
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-                
-            </main>
-            
-            <!-- Global Footer -->
-            <footer class="main-footer">
-                <p>&copy; <span id="footer-year">2026</span> Radar Dev — Atlas de Modernización Digital. Hecho para consultoría estratégica y desarrollo regional.</p>
-                <div class="footer-tag">Sector Privado + Instituciones no Estatales</div>
-            </footer>
+            <button class="menu-hamburger" id="menuHamburger" aria-label="Abrir Menú">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
         </div>
+    </nav>
+    
+    <!-- Hero Section & KPIs -->
+    <header class="hero" id="inicio">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-tag">Sector Privado + Instituciones no Estatales</span>
+                <h2>Atlas de Modernización Digital</h2>
+                <p>Mapeo estratégico y directorio de oportunidades en Entre Ríos, Santa Fe y Córdoba. Identificación de dolores operativos y soluciones de software donde el cambio tecnológico es inevitable.</p>
+            </div>
+            
+            <!-- Dynamic KPIs -->
+            <div class="kpi-grid">
+                <div class="kpi-card" onclick="document.getElementById('sectores').scrollIntoView({behavior: 'smooth'})">
+                    <div class="kpi-icon icon-sectores">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    </div>
+                    <div class="kpi-details">
+                        <span class="kpi-value" id="kpi-sectores">0</span>
+                        <span class="kpi-label">Sectores</span>
+                    </div>
+                </div>
+                
+                <div class="kpi-card" onclick="document.getElementById('directorio').scrollIntoView({behavior: 'smooth'})">
+                    <div class="kpi-icon icon-orgs">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                    </div>
+                    <div class="kpi-details">
+                        <span class="kpi-value" id="kpi-organizaciones">0</span>
+                        <span class="kpi-label">Contactos</span>
+                    </div>
+                </div>
+                
+                <div class="kpi-card" onclick="document.getElementById('problemas-soluciones').scrollIntoView({behavior: 'smooth'})">
+                    <div class="kpi-icon icon-problemas">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                    </div>
+                    <div class="kpi-details">
+                        <span class="kpi-value" id="kpi-problemas">0</span>
+                        <span class="kpi-label">Problemas</span>
+                    </div>
+                </div>
+                
+                <div class="kpi-card" onclick="document.getElementById('problemas-soluciones').scrollIntoView({behavior: 'smooth'})">
+                    <div class="kpi-icon icon-soluciones">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+                    </div>
+                    <div class="kpi-details">
+                        <span class="kpi-value" id="kpi-soluciones">0</span>
+                        <span class="kpi-label">Soluciones</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content Sections -->
+    <main class="main-content">
         
-    </div>
+        <!-- SECTION 1: SECTORES / OPORTUNIDADES -->
+        <section id="sectores" class="scroll-section">
+            <div class="section-header">
+                <h2>🏢 Sectores y Oportunidades</h2>
+                <div class="section-line"></div>
+                <p class="section-desc">Mapeo de prioridades comerciales donde la obsolescencia y la ineficiencia generan oportunidades inevitables de modernización.</p>
+            </div>
+            
+            <div class="grid-layout" id="sectores-grid">
+                <!-- Dynamic Content -->
+            </div>
+        </section>
+        
+        <!-- SECTION 2: PROBLEMAS Y SOLUCIONES -->
+        <section id="problemas-soluciones" class="scroll-section alt-bg">
+            <div class="section-header">
+                <h2>⚠️ Problemas y Soluciones Comunes</h2>
+                <div class="section-line"></div>
+                <p class="section-desc">Dolores organizacionales comunes identificados y las correspondientes propuestas tecnológicas de solución.</p>
+            </div>
+            
+            <div class="problems-solutions-container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" id="tabProblemsBtn">Problemas Generales</button>
+                    <button class="tab-btn" id="tabSolutionsBtn">Soluciones Sugeridas</button>
+                </div>
+                
+                <div class="tab-content-panel">
+                    <div class="grid-layout" id="problemas-soluciones-grid">
+                        <!-- Dynamic Content -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 3: DIRECTORIO DE CONTACTOS (CRM) -->
+        <section id="directorio" class="scroll-section">
+            <div class="section-header">
+                <h2>🏭 Directorio de Contactos y Empresas</h2>
+                <div class="section-line"></div>
+                <p class="section-desc">Registro detallado de organizaciones de la región (incluyendo el ecosistema de Software Factories locales y pymes prospectadas).</p>
+            </div>
+            
+            <div class="directorio-controls">
+                <!-- Global Search inside directory -->
+                <div class="search-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="globalSearch" placeholder="Buscar por nombre de empresa, ciudad, contacto o notas...">
+                    <button class="clear-search" id="clearSearchBtn" aria-label="Limpiar búsqueda">&times;</button>
+                </div>
+                
+                <!-- Filter Pills -->
+                <div class="filters-container">
+                    <div class="filter-row">
+                        <span class="filter-label">Provincia:</span>
+                        <div class="filter-pills" id="provincia-filter-pills">
+                            <button class="filter-pill active" data-provincia="todas">Todas</button>
+                            <button class="filter-pill" data-provincia="Entre Ríos">Entre Ríos</button>
+                            <button class="filter-pill" data-provincia="Santa Fe">Santa Fe</button>
+                            <button class="filter-pill" data-provincia="Córdoba">Córdoba</button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-row">
+                        <span class="filter-label">Sector:</span>
+                        <div class="filter-pills" id="sector-filter-pills">
+                            <button class="filter-pill active" data-sector="todos">Todos</button>
+                            <!-- Dynamic sector pills -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="directory-grid" id="organizaciones-grid">
+                <!-- Dynamic Content -->
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Clean Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; <span id="footer-year">2026</span> Radar Dev — Atlas de Modernización Digital.</p>
+            <span>Foco en Sector Privado e Instituciones No Estatales de la Región</span>
+        </div>
+    </footer>
     
     <!-- Detail Modal -->
     <div class="modal-overlay" id="detailModal">

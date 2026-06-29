@@ -1,12 +1,5 @@
 [
   {
-    "id": "gestion-documental-ia",
-    "nombre": "Gestión Documental + IA",
-    "prioridad": 10,
-    "especializacion": true,
-    "descripcion": "Convergencia de tecnologías de automatización, firma digital y búsqueda semántica RAG."
-  },
-  {
     "id": "estudios-contables",
     "nombre": "Estudios Contables",
     "prioridad": 10,
