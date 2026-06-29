@@ -1,0 +1,347 @@
+{
+  "version": "1.0",
+  "nombre": "Radar Dev",
+  "descripcion": "Mapa de organizaciones con potencial de modernización tecnológica",
+  "sectores": [
+    {
+      "id": "inmobiliarias",
+      "nombre": "Inmobiliarias",
+      "emoji": "🏠"
+    },
+    {
+      "id": "estudios_contables",
+      "nombre": "Estudios Contables",
+      "emoji": "📂"
+    },
+    {
+      "id": "clinicas",
+      "nombre": "Clínicas",
+      "emoji": "🏥"
+    },
+    {
+      "id": "laboratorios",
+      "nombre": "Laboratorios",
+      "emoji": "🧪"
+    },
+    {
+      "id": "colegios_privados",
+      "nombre": "Colegios Privados",
+      "emoji": "🏫"
+    },
+    {
+      "id": "cooperativas",
+      "nombre": "Cooperativas",
+      "emoji": "🤝"
+    },
+    {
+      "id": "logistica",
+      "nombre": "Logística",
+      "emoji": "🚚"
+    },
+    {
+      "id": "industria",
+      "nombre": "Industria",
+      "emoji": "🏭"
+    },
+    {
+      "id": "distribuidoras",
+      "nombre": "Distribuidoras",
+      "emoji": "📦"
+    },
+    {
+      "id": "salud",
+      "nombre": "Salud",
+      "emoji": "❤️"
+    }
+  ],
+  "organizaciones": [
+    {
+      "id": "own-home",
+      "nombre": "Own Home Real Estate",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "inmobiliarias",
+      "telefono": "+54 343 6222322",
+      "web": "ownhome.com.ar",
+      "contacto": "Martín Silva (Socio)",
+      "problemasPotenciales": [
+        "Seguimiento de clientes manual",
+        "Sin CRM centralizado",
+        "Automatización de consultas nula",
+        "Gestión documental física"
+      ],
+      "notas": "Reciben gran volumen de consultas mensuales y pierden trazabilidad en WhatsApp. Tienen interés en CRM ligero."
+    },
+    {
+      "id": "guerrero-inmob",
+      "nombre": "Guerrero Inmobiliaria",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "inmobiliarias",
+      "telefono": "+54 343 4726594",
+      "web": "guerreroinmobiliaria.com",
+      "contacto": "Estanislao Guerrero (Director)",
+      "problemasPotenciales": [
+        "Sin CRM de propiedades",
+        "Gestión de propiedades duplicada",
+        "Automatización de WhatsApp inactiva"
+      ],
+      "notas": "Falta de sincronización entre el catálogo de propiedades web y el portal inmobiliario. Todo el seguimiento es telefónico."
+    },
+    {
+      "id": "estudio-zt",
+      "nombre": "Estudio Contable ZT",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "estudios_contables",
+      "telefono": "+54 343 5195526",
+      "web": "",
+      "contacto": "Dra. Zulma Torres",
+      "problemasPotenciales": [
+        "Dependencia eterna de Excel",
+        "Gestión documental dispersa",
+        "Carga manual de comprobantes AFIP"
+      ],
+      "notas": "Procesamiento lento para liquidar impuestos a fin de mes por archivos PDF desordenados enviados por clientes."
+    },
+    {
+      "id": "estudio-rs",
+      "nombre": "Estudio Contable RS",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "estudios_contables",
+      "telefono": "+54 343 4638121",
+      "web": "",
+      "contacto": "Cr. Roberto Suárez",
+      "problemasPotenciales": [
+        "Procesos internos manuales",
+        "Gestión de clientes desordenada",
+        "Falta de reportes financieros"
+      ],
+      "notas": "Estudio pequeño con intenciones de modernizar la interacción y entrega de balances a clientes."
+    },
+    {
+      "id": "sanatorio-entrerriana",
+      "nombre": "Sanatorio La Entrerriana",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "clinicas",
+      "telefono": "+54 343 4200500",
+      "web": "laentrerriana.com.ar",
+      "contacto": "Dr. Juan Carlos Lallana (Admin)",
+      "problemasPotenciales": [
+        "Turnos telefónicos colapsados",
+        "Gestión documental fragmentada",
+        "Sistemas internos sin integrar"
+      ],
+      "notas": "Altos tiempos de espera. Las historias clínicas están a medio digitalizar. Necesitan autogestión de turnos."
+    },
+    {
+      "id": "clinical-model",
+      "nombre": "Clinical Model",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "clinicas",
+      "telefono": "+54 343 4420400",
+      "web": "clinicalmodel.com",
+      "contacto": "Dra. Inés Martínez (Directora)",
+      "problemasPotenciales": [
+        "Gestión de turnos caótica",
+        "Falta de CRM de pacientes",
+        "Ausencia de dashboards de ocupación"
+      ],
+      "notas": "Clínica privada de especialidades médicas. Buscan automatizar recordatorios de citas por WhatsApp para reducir ausentismo."
+    },
+    {
+      "id": "nanni-labs",
+      "nombre": "Nanni Laboratorios",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "laboratorios",
+      "telefono": "+54 343 4310783",
+      "web": "nannilaboratorios.com.ar",
+      "contacto": "Bioq. Javier Nanni",
+      "problemasPotenciales": [
+        "Gestión documental de resultados lenta",
+        "Falta de reportes integrados",
+        "Proceso de recepción manual"
+      ],
+      "notas": "Dificultad para enviar resultados automáticamente a pacientes y obras sociales. Todo se descarga en PDFs individuales."
+    },
+    {
+      "id": "lab-parana",
+      "nombre": "Laboratorio del Paraná",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "laboratorios",
+      "telefono": "+54 343 5025350",
+      "web": "",
+      "contacto": "Dra. Clara Benavidez",
+      "problemasPotenciales": [
+        "Integración de sistemas incompleta",
+        "Reportes manuales en hojas de cálculo",
+        "Archivo físico de órdenes médicas"
+      ],
+      "notas": "Sufren por órdenes médicas extraviadas y validación lenta de códigos de coberturas de salud."
+    },
+    {
+      "id": "instituto-michelangelo",
+      "nombre": "Instituto Modelo Bilingüe Michelangelo",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "colegios_privados",
+      "telefono": "+54 343 4232051",
+      "web": "michelangelo.edu.ar",
+      "contacto": "Prof. Silvina Galetti (Directora)",
+      "problemasPotenciales": [
+        "Gestión académica manual",
+        "Documentación estudiantil física",
+        "Comunicación ineficiente con familias"
+      ],
+      "notas": "Notas y asistencia registradas en planillas impresas que luego se cargan a un sistema interno antiguo."
+    },
+    {
+      "id": "colegio-la-salle",
+      "nombre": "Colegio La Salle",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "colegios_privados",
+      "telefono": "+54 343 4232704",
+      "web": "lasalleparana.edu.ar",
+      "contacto": "Hermano Jorge (Rector)",
+      "problemasPotenciales": [
+        "Gestión académica y boletines lentos",
+        "Falta de reportes consolidados",
+        "Automatización administrativa nula"
+      ],
+      "notas": "Colegio tradicional con intenciones de migrar la administración de legajos hacia una solución de gestión en la nube."
+    },
+    {
+      "id": "coop-agropecuarias-er",
+      "nombre": "Cooperativas Agropecuarias Federadas de Entre Ríos",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "cooperativas",
+      "telefono": "+54 343 4233001",
+      "web": "cafer.coop.ar",
+      "contacto": "Ing. Daniel Fontana (Gerente)",
+      "problemasPotenciales": [
+        "Gestión de asociados desarticulada",
+        "Reportes de producción manuales",
+        "Ausencia de dashboards comerciales"
+      ],
+      "notas": "Requiere consolidar información de compras de insumos agrícolas de cooperativas asociadas."
+    },
+    {
+      "id": "instituto-cooperativo",
+      "nombre": "Instituto de Promoción Cooperativa y Mutualidades",
+      "ciudad": "Paraná",
+      "provincia": "Entre Ríos",
+      "sector": "cooperativas",
+      "telefono": "+54 343 4207884",
+      "web": "ipcymer.gob.ar",
+      "contacto": "Dra. Marta Ledesma",
+      "problemasPotenciales": [
+        "Gestión documental física y pesada",
+        "Automatización de trámites nula"
+      ],
+      "notas": "Organismo estatal no excluyente de relaciones con cooperativas. Cuentan con un archivo gigantesco de legajos mutuos que tardan días en auditarse."
+    },
+    {
+      "id": "distribuidora-santa-fe",
+      "nombre": "Distribuidora Santa Fe",
+      "ciudad": "Santa Fe",
+      "provincia": "Santa Fe",
+      "sector": "distribuidoras",
+      "telefono": "+54 342 5967424",
+      "web": "",
+      "contacto": "Javier Bianchi (Logística)",
+      "problemasPotenciales": [
+        "Stock manual con desajustes",
+        "Carga de pedidos por teléfono",
+        "Automatización de remisión ineficiente"
+      ],
+      "notes": "Distribuidora mayorista de alimentos. Tienen demoras en el despacho por planillas de stock desactualizadas."
+    },
+    {
+      "id": "union-industrial-sf",
+      "nombre": "Unión Industrial de Santa Fe",
+      "ciudad": "Santa Fe",
+      "provincia": "Santa Fe",
+      "sector": "industria",
+      "telefono": "+54 342 4530660",
+      "web": "uisf.org.ar",
+      "contacto": "Dr. Alejandro Taborda (Presidente)",
+      "problemasPotenciales": [
+        "Gestión documental administrativa lenta",
+        "Falta de indicadores de socios",
+        "Integración de canales de comunicación"
+      ],
+      "notas": "Cámara empresarial clave para networking y detección de pymes industriales con dolor en la región."
+    },
+    {
+      "id": "sm-industrial",
+      "nombre": "SM Industrial",
+      "ciudad": "Santa Fe",
+      "provincia": "Santa Fe",
+      "sector": "industria",
+      "telefono": "+54 342 4897482",
+      "web": "smindustrial.com.ar",
+      "contacto": "Ing. Gustavo Rossi",
+      "problemasPotenciales": [
+        "Reportes de planta manuales",
+        "Ausencia de dashboards de producción",
+        "Automatización de inventario deficiente"
+      ],
+      "notas": "Fábrica de repuestos metálicos. Tienen ERP antiguo y no pueden visualizar KPIs en tiempo real."
+    },
+    {
+      "id": "rosario-logistica",
+      "nombre": "Rosario Logística",
+      "ciudad": "Rosario",
+      "provincia": "Santa Fe",
+      "sector": "logistica",
+      "telefono": "+54 341 3174646",
+      "web": "rosariologistica.com.ar",
+      "contacto": "Marcelo Funes (Operaciones)",
+      "problemasPotenciales": [
+        "Falta de trazabilidad de viajes",
+        "Planificación de rutas manual",
+        "Indicadores de combustible ausentes"
+      ],
+      "notas": "Flota de 25 camiones. Usan WhatsApp y llamadas para saber la ubicación de choferes. Necesitan un panel GPS/Logística integrado."
+    },
+    {
+      "id": "rosario-agro-industrial",
+      "nombre": "Rosario Agro Industrial",
+      "ciudad": "Rosario",
+      "provincia": "Santa Fe",
+      "sector": "industria",
+      "telefono": "+54 341 4404218",
+      "web": "",
+      "contacto": "Ing. Esteban Pignolo",
+      "problemasPotenciales": [
+        "Gestión documental de despachos lenta",
+        "Reportes de balanza manuales",
+        "Integración de sistemas de acopio"
+      ],
+      "notas": "Dificultad para integrar las planillas de pesaje de granos con el sistema administrativo principal."
+    },
+    {
+      "id": "santo-domingo-cordoba",
+      "nombre": "Centro Educativo Santo Domingo",
+      "ciudad": "Córdoba",
+      "provincia": "Córdoba",
+      "sector": "colegios_privados",
+      "telefono": "+54 351 4220946",
+      "web": "santodomingo.edu.ar",
+      "contacto": "Dra. Silvina Romero",
+      "problemasPotenciales": [
+        "Gestión académica fragmentada",
+        "Documentación física y digital sin indexar",
+        "Comunicación con tutores desorganizada"
+      ],
+      "notas": "Institución de gran tamaño que evalúa modernizar su software de autogestión de inscripciones y cobros."
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atlas de Modernización Digital — Radar Dev</title>
+    <title>Radar Dev</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,14 +19,13 @@
                 <div class="brand-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
                 </div>
-                <span>Radar Dev <small>/ Atlas Digital</small></span>
+                <span>Radar Dev</span>
             </a>
             
             <div class="navbar-menu" id="navbarMenu">
                 <a href="#inicio" class="menu-item active">Inicio</a>
                 <a href="#sectores" class="menu-item">Sectores</a>
-                <a href="#problemas-soluciones" class="menu-item">Problemas y Soluciones</a>
-                <a href="#directorio" class="menu-item">Directorio de Contactos</a>
+                <a href="#directorio" class="menu-item">Organizaciones y Contactos</a>
             </div>
             
             <button class="menu-hamburger" id="menuHamburger" aria-label="Abrir Menú">
@@ -35,16 +34,16 @@
         </div>
     </nav>
     
-    <!-- Hero Section & KPIs -->
+    <!-- Hero Header Section -->
     <header class="hero" id="inicio">
         <div class="hero-container">
             <div class="hero-content">
                 <span class="hero-tag">Sector Privado + Instituciones no Estatales</span>
-                <h2>Atlas de Modernización Digital</h2>
-                <p>Mapeo estratégico y directorio de oportunidades en Entre Ríos, Santa Fe y Córdoba. Identificación de dolores operativos y soluciones de software donde el cambio tecnológico es inevitable.</p>
+                <h2>Radar Dev</h2>
+                <p>Mapa de organizaciones con potencial de modernización tecnológica en Entre Ríos, Santa Fe y Córdoba.</p>
             </div>
             
-            <!-- Dynamic KPIs -->
+            <!-- Metric Counters -->
             <div class="kpi-grid">
                 <div class="kpi-card" onclick="document.getElementById('sectores').scrollIntoView({behavior: 'smooth'})">
                     <div class="kpi-icon icon-sectores">
@@ -52,7 +51,7 @@
                     </div>
                     <div class="kpi-details">
                         <span class="kpi-value" id="kpi-sectores">0</span>
-                        <span class="kpi-label">Sectores</span>
+                        <span class="kpi-label">Sectores Mapeados</span>
                     </div>
                 </div>
                 
@@ -62,88 +61,56 @@
                     </div>
                     <div class="kpi-details">
                         <span class="kpi-value" id="kpi-organizaciones">0</span>
-                        <span class="kpi-label">Contactos</span>
+                        <span class="kpi-label">Organizaciones</span>
                     </div>
                 </div>
                 
-                <div class="kpi-card" onclick="document.getElementById('problemas-soluciones').scrollIntoView({behavior: 'smooth'})">
-                    <div class="kpi-icon icon-problemas">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
-                    </div>
-                    <div class="kpi-details">
-                        <span class="kpi-value" id="kpi-problemas">0</span>
-                        <span class="kpi-label">Problemas</span>
-                    </div>
-                </div>
-                
-                <div class="kpi-card" onclick="document.getElementById('problemas-soluciones').scrollIntoView({behavior: 'smooth'})">
+                <div class="kpi-card" onclick="document.getElementById('directorio').scrollIntoView({behavior: 'smooth'})">
                     <div class="kpi-icon icon-soluciones">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
                     </div>
                     <div class="kpi-details">
-                        <span class="kpi-value" id="kpi-soluciones">0</span>
-                        <span class="kpi-label">Soluciones</span>
+                        <span class="kpi-value" id="kpi-provincias">3</span>
+                        <span class="kpi-label">Provincias</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
     
-    <!-- Main Content Sections -->
+    <!-- Main Content -->
     <main class="main-content">
         
-        <!-- SECTION 1: SECTORES / OPORTUNIDADES -->
+        <!-- SECTION 1: SECTORES -->
         <section id="sectores" class="scroll-section">
             <div class="section-header">
-                <h2>🏢 Sectores y Oportunidades</h2>
+                <h2>🏢 Sectores</h2>
                 <div class="section-line"></div>
-                <p class="section-desc">Mapeo de prioridades comerciales donde la obsolescencia y la ineficiencia generan oportunidades inevitables de modernización.</p>
+                <p class="section-desc">Selecciona un sector para filtrar el directorio de organizaciones y ver sus dolores operativos comunes.</p>
             </div>
             
             <div class="grid-layout" id="sectores-grid">
-                <!-- Dynamic Content -->
+                <!-- Dynamic Sector Cards -->
             </div>
         </section>
         
-        <!-- SECTION 2: PROBLEMAS Y SOLUCIONES -->
-        <section id="problemas-soluciones" class="scroll-section alt-bg">
+        <!-- SECTION 2: ORGANIZACIONES Y CONTACTOS -->
+        <section id="directorio" class="scroll-section alt-bg">
             <div class="section-header">
-                <h2>⚠️ Problemas y Soluciones Comunes</h2>
+                <h2>📍 Organizaciones y Contactos</h2>
                 <div class="section-line"></div>
-                <p class="section-desc">Dolores organizacionales comunes identificados y las correspondientes propuestas tecnológicas de solución.</p>
-            </div>
-            
-            <div class="problems-solutions-container">
-                <div class="tabs-header">
-                    <button class="tab-btn active" id="tabProblemsBtn">Problemas Generales</button>
-                    <button class="tab-btn" id="tabSolutionsBtn">Soluciones Sugeridas</button>
-                </div>
-                
-                <div class="tab-content-panel">
-                    <div class="grid-layout" id="problemas-soluciones-grid">
-                        <!-- Dynamic Content -->
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- SECTION 3: DIRECTORIO DE CONTACTOS (CRM) -->
-        <section id="directorio" class="scroll-section">
-            <div class="section-header">
-                <h2>🏭 Directorio de Contactos y Empresas</h2>
-                <div class="section-line"></div>
-                <p class="section-desc">Registro detallado de organizaciones de la región (incluyendo el ecosistema de Software Factories locales y pymes prospectadas).</p>
+                <p class="section-desc">Explora quién podría necesitar ayuda, consulta sus datos y problemas observados, e inicia contacto directo.</p>
             </div>
             
             <div class="directorio-controls">
-                <!-- Global Search inside directory -->
+                <!-- Search bar -->
                 <div class="search-box">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    <input type="text" id="globalSearch" placeholder="Buscar por nombre de empresa, ciudad, contacto o notas...">
+                    <input type="text" id="globalSearch" placeholder="Buscar organización, ciudad, problemas o notas...">
                     <button class="clear-search" id="clearSearchBtn" aria-label="Limpiar búsqueda">&times;</button>
                 </div>
                 
-                <!-- Filter Pills -->
+                <!-- Filters -->
                 <div class="filters-container">
                     <div class="filter-row">
                         <span class="filter-label">Provincia:</span>
@@ -166,17 +133,17 @@
             </div>
             
             <div class="directory-grid" id="organizaciones-grid">
-                <!-- Dynamic Content -->
+                <!-- Dynamic Organization Cards -->
             </div>
         </section>
         
     </main>
     
-    <!-- Clean Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <p>&copy; <span id="footer-year">2026</span> Radar Dev — Atlas de Modernización Digital.</p>
-            <span>Foco en Sector Privado e Instituciones No Estatales de la Región</span>
+            <p>&copy; <span id="footer-year">2026</span> Radar Dev</p>
+            <span>Foco en Sector Privado e Instituciones No Estatales</span>
         </div>
     </footer>
     
@@ -185,12 +152,11 @@
         <div class="modal-content">
             <button class="modal-close" id="modalCloseBtn" aria-label="Cerrar modal">&times;</button>
             <div id="modalDetailsBody">
-                <!-- Dynamic details content -->
+                <!-- Dynamic details sheet -->
             </div>
         </div>
     </div>
-
-    <!-- App Logic -->
+    
     <script src="app.js"></script>
 </body>
 </html>
