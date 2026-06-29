@@ -1,0 +1,44 @@
+[
+  {
+    "id": "excel-eterno",
+    "nombre": "Dependencia excesiva de Excel",
+    "impacto": "Alto",
+    "descripcion": "Procesos manuales propensos a errores y silos de información inaccesibles.",
+    "sectores": ["estudios-contables", "cooperativas", "educacion", "distribuidoras"]
+  },
+  {
+    "id": "whatsapp-crm",
+    "nombre": "WhatsApp como CRM y Pipeline de Ventas",
+    "impacto": "Alto",
+    "descripcion": "Pérdida de trazabilidad de leads, mensajes sin responder y falta de reportes.",
+    "sectores": ["inmobiliarias", "distribuidoras", "clinicas"]
+  },
+  {
+    "id": "documentacion-dispersa",
+    "nombre": "Documentación física y archivos PDF sin indexar",
+    "impacto": "Muy Alto",
+    "descripcion": "Horas perdidas buscando contratos, facturas, legajos o historias clínicas.",
+    "sectores": ["gestion-documental-ia", "educacion", "clinicas", "empresas-industriales"]
+  },
+  {
+    "id": "stock-manual",
+    "nombre": "Control de stock manual y desfasado",
+    "impacto": "Alto",
+    "descripcion": "Roturas de stock inesperadas o sobrestock por compras sin planificación centralizada.",
+    "sectores": ["distribuidoras", "empresas-industriales"]
+  },
+  {
+    "id": "turnos-caoticos",
+    "nombre": "Gestión de turnos y agendas ineficiente",
+    "impacto": "Alto",
+    "descripcion": "Ausentismo sin notificar, sobre-turnos y salas de espera colapsadas.",
+    "sectores": ["clinicas"]
+  },
+  {
+    "id": "sistemas-legacy",
+    "nombre": "Sistemas administrativos obsoletos (AS400, FoxPro, etc.)",
+    "impacto": "Muy Alto",
+    "descripcion": "Imposibilidad de integrar nuevas herramientas o consultar datos móviles.",
+    "sectores": ["empresas-industriales", "cooperativas", "estudios-contables"]
+  }
+]

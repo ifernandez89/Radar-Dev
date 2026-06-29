@@ -1,0 +1,206 @@
+[
+  {
+    "id": "nexpo-tech",
+    "nombre": "NexPO",
+    "ciudad": "Rosario",
+    "provincia": "Santa Fe",
+    "sector": "software-factories",
+    "madurezDigital": 5,
+    "contacto": {
+      "persona": "Ing. Gustavo Valenzuela",
+      "puesto": "Director de Tecnología",
+      "telefono": "+54 341 555-1289",
+      "email": "g.valenzuela@nexpo.io"
+    },
+    "dolores": [],
+    "oportunidades": [],
+    "notas": "Software Factory enfocada en IA y modernización de procesos para medianas empresas. Sirve como referencia de mercado y potencial aliado para derivaciones."
+  },
+  {
+    "id": "ilusoft",
+    "nombre": "ILUSOFT",
+    "ciudad": "Santa Fe",
+    "provincia": "Santa Fe",
+    "sector": "software-factories",
+    "madurezDigital": 5,
+    "contacto": {
+      "persona": "Marcos Rossi",
+      "puesto": "Co-Fundador",
+      "telefono": "+54 342 412-8877",
+      "email": "marcos@ilusoft.com.ar"
+    },
+    "dolores": [],
+    "oportunidades": [],
+    "notas": "Especialistas en desarrollo ERP y automatizaciones administrativas en la región centro."
+  },
+  {
+    "id": "sinergia-software",
+    "nombre": "Sinergia Software",
+    "ciudad": "Rosario",
+    "provincia": "Santa Fe",
+    "sector": "software-factories",
+    "madurezDigital": 4,
+    "contacto": {
+      "persona": "Laura Benítez",
+      "puesto": "Product Manager Industrial",
+      "telefono": "+54 341 499-0120",
+      "email": "lbenitez@sinergia.software"
+    },
+    "dolores": [],
+    "oportunidades": [],
+    "notas": "Fuerte enfoque en ERP industriales y migración/integración de sistemas legacy (AS400)."
+  },
+  {
+    "id": "openwings",
+    "nombre": "OpenWings",
+    "ciudad": "Córdoba",
+    "provincia": "Córdoba",
+    "sector": "software-factories",
+    "madurezDigital": 5,
+    "contacto": {
+      "persona": "Alejandro Ortega",
+      "puesto": "CTO",
+      "telefono": "+54 351 680-3322",
+      "email": "aortega@openwings.dev"
+    },
+    "dolores": [],
+    "oportunidades": [],
+    "notas": "Desarrollo ágil de ERP y software a medida para logística y distribución."
+  },
+  {
+    "id": "ingenea",
+    "nombre": "Ingenea",
+    "ciudad": "Paraná",
+    "provincia": "Entre Ríos",
+    "sector": "software-factories",
+    "madurezDigital": 4,
+    "contacto": {
+      "persona": "Ing. Carlos Gietz",
+      "puesto": "Socio Gerente",
+      "telefono": "+54 343 423-0099",
+      "email": "cgietz@ingenea.com.ar"
+    },
+    "dolores": [],
+    "oportunidades": [],
+    "notas": "Automatización industrial y software corporativo en Entre Ríos."
+  },
+  {
+    "id": "estudio-contable-alvarez",
+    "nombre": "Estudio Contable Álvarez & Asociados",
+    "ciudad": "Paraná",
+    "provincia": "Entre Ríos",
+    "sector": "estudios-contables",
+    "madurezDigital": 2,
+    "contacto": {
+      "persona": "Dr. Fernando Álvarez",
+      "puesto": "Socio Principal",
+      "telefono": "+54 343 431-9860",
+      "email": "falvarez@estudioalvarez.com.ar"
+    },
+    "dolores": ["excel-eterno", "sistemas-legacy"],
+    "oportunidades": ["automatizacion-afip", "dashboard-ejecutivo"],
+    "notas": "Sufre cuello de botella mensual descargando facturas de clientes en AFIP de forma manual. Muy receptivo a bots de automatización."
+  },
+  {
+    "id": "inmobiliaria-litoral",
+    "nombre": "Inmobiliaria Litoral Propiedades",
+    "ciudad": "Santa Fe",
+    "provincia": "Santa Fe",
+    "sector": "inmobiliarias",
+    "madurezDigital": 2,
+    "contacto": {
+      "persona": "Federico Stettler",
+      "puesto": "Gerente Comercial",
+      "telefono": "+54 342 453-2211",
+      "email": "federico@litoralpropiedades.com"
+    },
+    "dolores": ["whatsapp-crm"],
+    "oportunidades": ["crm-light"],
+    "notas": "Pérdida de leads. Recibe más de 100 consultas diarias por WhatsApp y no tienen registro consolidado ni pipeline de ventas."
+  },
+  {
+    "id": "clinica-parana",
+    "nombre": "Clínica de la Ciudad (Sanatorio Paraná)",
+    "ciudad": "Paraná",
+    "provincia": "Entre Ríos",
+    "sector": "clinicas",
+    "madurezDigital": 3,
+    "contacto": {
+      "persona": "Dra. Silvina Romero",
+      "puesto": "Directora Médica",
+      "telefono": "+54 343 420-1500",
+      "email": "sromero@clinicadelaciudad.com.ar"
+    },
+    "dolores": ["turnos-caoticos", "documentacion-dispersa"],
+    "oportunidades": ["sistema-turnos-notificacion", "rag-documental"],
+    "notas": "Historias clínicas dispersas en PDFs escaneados y carpetas físicas. Interés en asistente de IA para buscar síntomas históricos en legajos viejos."
+  },
+  {
+    "id": "distribuidora-del-centro",
+    "nombre": "Distribuidora del Centro S.R.L.",
+    "ciudad": "Córdoba",
+    "provincia": "Córdoba",
+    "sector": "distribuidoras",
+    "madurezDigital": 3,
+    "contacto": {
+      "persona": "Hugo Taboada",
+      "puesto": "Jefe de Operaciones",
+      "telefono": "+54 351 475-4400",
+      "email": "htaboada@distribuidoracentro.com"
+    },
+    "dolores": ["stock-manual", "whatsapp-crm"],
+    "oportunidades": ["crm-light", "dashboard-ejecutivo"],
+    "notas": "Toman pedidos vía telefónica y WhatsApp. Registran el stock en un sistema de escritorio viejo que no sincroniza con los vendedores."
+  },
+  {
+    "id": "instituto-tecnico-nacional",
+    "nombre": "Instituto Tecnológico Superior Paraná",
+    "ciudad": "Paraná",
+    "provincia": "Entre Ríos",
+    "sector": "educacion",
+    "madurezDigital": 2,
+    "contacto": {
+      "persona": "Prof. Daniel Fontana",
+      "puesto": "Rector",
+      "telefono": "+54 343 434-2288",
+      "email": "dfontana@itsparanar.edu.ar"
+    },
+    "dolores": ["documentacion-dispersa", "excel-eterno"],
+    "oportunidades": ["workflow-documental", "rag-documental"],
+    "notas": "Gestión de actas de exámenes, legajos estudiantiles y notas en carpetas físicas. Necesitan firmar actas digitalmente y automatizar su archivo."
+  },
+  {
+    "id": "cooperativa-agricola-crespo",
+    "nombre": "Cooperativa Agrícola La Unión de Crespo",
+    "ciudad": "Crespo",
+    "provincia": "Entre Ríos",
+    "sector": "cooperativas",
+    "madurezDigital": 2,
+    "contacto": {
+      "persona": "Oscar Heinze",
+      "puesto": "Gerente Administrativo",
+      "telefono": "+54 343 495-1022",
+      "email": "oheinze@cooplaunion.com"
+    },
+    "dolores": ["excel-eterno", "sistemas-legacy"],
+    "oportunidades": ["workflow-documental", "dashboard-ejecutivo"],
+    "notas": "Administración de asociados por planillas de cálculo gigantescas. Trámites de cuotas y servicios lentificados."
+  },
+  {
+    "id": "metalurgica-rosario",
+    "nombre": "Metalúrgica Rosario S.A.",
+    "ciudad": "Rosario",
+    "provincia": "Santa Fe",
+    "sector": "empresas-industriales",
+    "madurezDigital": 3,
+    "contacto": {
+      "persona": "Ing. Esteban Pignolo",
+      "puesto": "Gerente de Planta",
+      "telefono": "+54 341 465-9000",
+      "email": "epignolo@metalurgicarosario.com"
+    },
+    "dolores": ["sistemas-legacy", "documentacion-dispersa"],
+    "oportunidades": ["dashboard-ejecutivo", "rag-documental"],
+    "notas": "Tienen un sistema AS400 sólido pero inaccesible para generar reportes en tiempo real. Placa de control de producción manual."
+  }
+]

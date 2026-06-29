@@ -1,0 +1,38 @@
+[
+  {
+    "id": "crm-light",
+    "nombre": "CRM Liviano / Tubería de Leads",
+    "descripcion": "Software simplificado integrado con APIs de mensajería para seguimiento ordenado de leads.",
+    "sectores": ["inmobiliarias", "distribuidoras"]
+  },
+  {
+    "id": "rag-documental",
+    "nombre": "Asistente RAG (IA sobre Documentación)",
+    "descripcion": "Base de datos vectorial (pgvector) y LLM local/API para chatear con archivos internos, contratos e historias clínicas.",
+    "sectores": ["gestion-documental-ia", "educacion", "clinicas"]
+  },
+  {
+    "id": "workflow-documental",
+    "nombre": "Gestor Documental + Firma Digital",
+    "descripcion": "Flujo de trabajo para firma electrónica de contratos, legajos y digitalización indexada.",
+    "sectores": ["gestion-documental-ia", "cooperativas", "educacion"]
+  },
+  {
+    "id": "dashboard-ejecutivo",
+    "nombre": "Dashboard Ejecutivo e Integración de Datos",
+    "descripcion": "Conector que unifica bases de datos SQL antiguas y APIs para mostrar KPIs visuales interactivos.",
+    "sectores": ["empresas-industriales", "estudios-contables"]
+  },
+  {
+    "id": "automatizacion-afip",
+    "nombre": "Automatización Tributaria & AFIP Scraper",
+    "descripcion": "Scripts y bots para descarga automatizada de facturas, notificaciones de AFIP y carga contable.",
+    "sectores": ["estudios-contables"]
+  },
+  {
+    "id": "sistema-turnos-notificacion",
+    "nombre": "Gestor de Citas con Recordatorio WhatsApp/SMS",
+    "descripcion": "Portal de autogestión de citas médicas o académicas integrado con notificaciones automáticas para reducir ausentismo.",
+    "sectores": ["clinicas", "educacion"]
+  }
+]
